@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نواف | حساباتي</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#ffffff;
+    --card:#ffffff;
+    --text:#111;
+    --sub:#666;
+    --btn:#6b7280;
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#fff;
+    --sub:#cbd5e1;
+    --btn:#334155;
+}
+
+body{
+    margin:0;
+    font-family:'Cairo', Arial;
+    background:var(--bg);
+    color:var(--text);
+    text-align:center;
+    transition:0.4s;
+}
+
+.topbar{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.topbar button{
+    padding:8px 14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#6b7280;
+    color:white;
+}
+
+.profile-img{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    margin-top:20px;
+    object-fit:cover;
+    border:4px solid #ddd;
+}
+
+h1{
+    margin:15px 0;
+    font-size:26px;
+}
+
+.bio{
+    font-size:16px;
+    color:var(--sub);
+    padding:0 15px;
+}
+
+.card{
+    width:90%;
+    max-width:400px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:20px;
+    background:var(--card);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.links a{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:12px 0;
+    padding:16px;
+    border-radius:14px;
+    color:white;
+    text-decoration:none;
+    font-size:17px;
+    font-weight:600;
+    background:var(--btn);
+    transition:0.25s;
+}
+
+.links a:hover{transform:scale(1.05);}
+.links a:active{transform:scale(0.96);}
+
+.app-icon{
+    position:absolute;
+    left:12px;
+    width:22px;
+}
+
+.small-img{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+}
+
+.footer{
+    margin:35px 15px;
+    font-size:15px;
+    color:var(--sub);
+    line-height:1.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<button onclick="toggleTheme()">الوضع</button>
+<button onclick="shareSite()">مشاركة</button>
+</div>
+
+<img src="https://i.ibb.co/G33P8hvq/image.jpg" class="profile-img">
+
+<h1>تابعني ولك الأجر إن شاءالله</h1>
+
+<div class="bio">
+محتوى ديني هادف يذكّر وينفع بإذن الله
+</div>
+
+<div class="card">
+<div class="links">
+
+<a href="https://www.instagram.com/r.3jg">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="app-icon">
+<img src="https://i.ibb.co/G33P8hvq/image.jpg" class="small-img">
+انستقرام
+</a>
+
+<a href="https://www.tiktok.com/@y10fl">
+<img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="app-icon">
+<img src="https://i.ibb.co/G33P8hvq/image.jpg" class="small-img">
+تيك توك
+</a>
+
+<a href="https://whatsapp.com/channel/0029VbC22eZGE56qdLDPyr3P">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="app-icon">
+<img src="https://i.ibb.co/G33P8hvq/image.jpg" class="small-img">
+قناة واتساب
+</a>
+
+<a href="https://youtube.com/@zamtc">
+<img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="app-icon">
+<img src="https://i.ibb.co/G33P8hvq/image.jpg" class="small-img">
+يوتيوب
+</a>
+
+<a href="https://t.me/zsmtca">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="app-icon">
+<img src="https://i.ibb.co/G33P8hvq/image.jpg" class="small-img">
+تيليجرام
+</a>
+
+</div>
+</div>
+
+<div class="footer">
+أحاول اترك أثر طيّب 🌹<br><br>
+هذه الحسابات صدقه جاريه لي ولوالدي ولمن يتابعني، ليس بقصد الاحتيال والله المستعان 🤍🌷
+</div>
+
+<script>
+function toggleTheme(){
+    document.body.classList.toggle("dark");
+    localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark":"light");
+}
+
+if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+}
+
+function shareSite(){
+    if(navigator.share){
+        navigator.share({
+            title:"نواف",
+            text:"تابع حساباتي",
+            url:window.location.href
+        });
+    }else{
+        navigator.clipboard.writeText(window.location.href);
+        alert("تم نسخ الرابط 👍");
+    }
+}
+</script>
+
+</body>
+</html>
