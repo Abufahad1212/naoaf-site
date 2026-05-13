@@ -82,7 +82,7 @@ h1{
     box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-.links a{
+.link-btn{
     position:relative;
     display:flex;
     align-items:center;
@@ -98,11 +98,11 @@ h1{
     transition:0.25s;
 }
 
-.links a:hover{
+.link-btn:hover{
     transform:scale(1.05);
 }
 
-.links a:active{
+.link-btn:active{
     transform:scale(0.96);
 }
 
@@ -110,6 +110,18 @@ h1{
     position:absolute;
     left:12px;
     width:22px;
+}
+
+/* زر الثلاث نقاط داخل كل زر */
+.share-btn{
+    position:absolute;
+    right:10px;
+    top:10px;
+    background:none;
+    border:none;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
 }
 
 .footer{
@@ -125,7 +137,7 @@ h1{
 
 <div class="topbar">
 <button id="themeBtn" onclick="toggleTheme()">ليلي</button>
-<button onclick="shareSite()">⋮</button>
+<button onclick="shareSite()">مشاركة</button>
 </div>
 
 <img src="https://i.ibb.co/LX1DxdTf/image.png" class="profile-img">
@@ -141,29 +153,39 @@ h1{
 <div class="card">
 <div class="links">
 
-<a href="https://www.instagram.com/r.3jg">
+<!-- انستقرام -->
+<a class="link-btn" href="https://www.instagram.com/r.3jg">
 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="app-icon">
 انستقرام
+<button class="share-btn" onclick="shareLink(event,'https://www.instagram.com/r.3jg')">⋮</button>
 </a>
 
-<a href="https://www.tiktok.com/@y10fl">
+<!-- تيك توك -->
+<a class="link-btn" href="https://www.tiktok.com/@y10fl">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="app-icon">
 تيك توك
+<button class="share-btn" onclick="shareLink(event,'https://www.tiktok.com/@y10fl')">⋮</button>
 </a>
 
-<a href="https://whatsapp.com/channel/0029VbC22eZGE56qdLDPyr3P">
+<!-- واتساب -->
+<a class="link-btn" href="https://whatsapp.com/channel/0029VbC22eZGE56qdLDPyr3P">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="app-icon">
 قناة واتساب
+<button class="share-btn" onclick="shareLink(event,'https://whatsapp.com/channel/0029VbC22eZGE56qdLDPyr3P')">⋮</button>
 </a>
 
-<a href="https://youtube.com/@zamtc">
+<!-- يوتيوب -->
+<a class="link-btn" href="https://youtube.com/@zamtc">
 <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="app-icon">
 يوتيوب
+<button class="share-btn" onclick="shareLink(event,'https://youtube.com/@zamtc')">⋮</button>
 </a>
 
-<a href="https://t.me/zsmtca">
+<!-- تيليجرام -->
+<a class="link-btn" href="https://t.me/zsmtca">
 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="app-icon">
 تيليجرام
+<button class="share-btn" onclick="shareLink(event,'https://t.me/zsmtca')">⋮</button>
 </a>
 
 </div>
@@ -171,47 +193,48 @@ h1{
 
 <div class="footer">
 أحاول اترك أثر طيّب 🌹<br><br>
-هذه الحسابات صدقه جاريه لي ولوالدي ولمن يتابعني، ليس بقصد الاحتيال والله المستعان 🤍🌷
+هذه الحسابات صدقه جاريه لي ولوالدي ولمن يتابعني 🤍🌷
 </div>
 
 <script>
 const themeBtn = document.getElementById("themeBtn");
 
 function updateThemeButton(){
-    if(document.body.classList.contains("dark")){
-        themeBtn.textContent = "نهاري";
-    }else{
-        themeBtn.textContent = "ليلي";
-    }
+    themeBtn.textContent = document.body.classList.contains("dark") ? "نهاري" : "ليلي";
 }
 
 function toggleTheme(){
     document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-        "theme",
-        document.body.classList.contains("dark") ? "dark" : "light"
-    );
-
+    localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
     updateThemeButton();
 }
 
-if(localStorage.getItem("theme") === "dark"){
+if(localStorage.getItem("theme")==="dark"){
     document.body.classList.add("dark");
 }
-
 updateThemeButton();
 
 function shareSite(){
+    navigator.share?.({
+        title:"نواف",
+        text:"تابع حساباتي",
+        url:window.location.href
+    }) || navigator.clipboard.writeText(window.location.href);
+}
+
+/* مشاركة زر داخل كل تطبيق */
+function shareLink(event,url){
+    event.preventDefault();
+    event.stopPropagation();
+
     if(navigator.share){
         navigator.share({
-            title:"نواف",
-            text:"تابع حساباتي",
-            url:window.location.href
+            title:"رابط",
+            url:url
         });
     }else{
-        navigator.clipboard.writeText(window.location.href);
-        alert("تم نسخ الرابط 👍");
+        navigator.clipboard.writeText(url);
+        alert("تم نسخ الرابط");
     }
 }
 </script>
