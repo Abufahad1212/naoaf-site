@@ -48,6 +48,7 @@ body{
     background:#6b7280;
     color:white;
     font-size:18px;
+    font-family:'Cairo', Arial;
 }
 
 .profile-img{
@@ -68,6 +69,7 @@ h1{
     font-size:16px;
     color:var(--sub);
     padding:0 15px;
+    line-height:1.9;
 }
 
 .card{
@@ -96,19 +98,18 @@ h1{
     transition:0.25s;
 }
 
-.links a:hover{transform:scale(1.05);}
-.links a:active{transform:scale(0.96);}
+.links a:hover{
+    transform:scale(1.05);
+}
+
+.links a:active{
+    transform:scale(0.96);
+}
 
 .app-icon{
     position:absolute;
     left:12px;
     width:22px;
-}
-
-.small-img{
-    width:22px;
-    height:22px;
-    border-radius:50%;
 }
 
 .footer{
@@ -123,8 +124,8 @@ h1{
 <body>
 
 <div class="topbar">
-<button onclick="toggleTheme()">☀️</button>
-<button onclick="shareSite()">مشاركة</button>
+<button id="themeBtn" onclick="toggleTheme()">ليلي</button>
+<button onclick="shareSite()">⋮</button>
 </div>
 
 <img src="https://i.ibb.co/LX1DxdTf/image.png" class="profile-img">
@@ -133,6 +134,8 @@ h1{
 
 <div class="bio">
 محتوى ديني هادف يذكّر وينفع بإذن الله
+<br><br>
+"خذ ما شئت فهو لله"
 </div>
 
 <div class="card">
@@ -140,31 +143,26 @@ h1{
 
 <a href="https://www.instagram.com/r.3jg">
 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="app-icon">
-<img src="https://i.ibb.co/pm5KSkf/image.png" class="small-img">
 انستقرام
 </a>
 
 <a href="https://www.tiktok.com/@y10fl">
 <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="app-icon">
-<img src="https://i.ibb.co/pm5KSkf/image.png" class="small-img">
 تيك توك
 </a>
 
 <a href="https://whatsapp.com/channel/0029VbC22eZGE56qdLDPyr3P">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="app-icon">
-<img src="https://i.ibb.co/pm5KSkf/image.png" class="small-img">
 قناة واتساب
 </a>
 
 <a href="https://youtube.com/@zamtc">
 <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="app-icon">
-<img src="https://i.ibb.co/pm5KSkf/image.png" class="small-img">
 يوتيوب
 </a>
 
 <a href="https://t.me/zsmtca">
 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="app-icon">
-<img src="https://i.ibb.co/pm5KSkf/image.png" class="small-img">
 تيليجرام
 </a>
 
@@ -177,14 +175,32 @@ h1{
 </div>
 
 <script>
+const themeBtn = document.getElementById("themeBtn");
+
+function updateThemeButton(){
+    if(document.body.classList.contains("dark")){
+        themeBtn.textContent = "نهاري";
+    }else{
+        themeBtn.textContent = "ليلي";
+    }
+}
+
 function toggleTheme(){
     document.body.classList.toggle("dark");
-    localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark":"light");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark") ? "dark" : "light"
+    );
+
+    updateThemeButton();
 }
 
 if(localStorage.getItem("theme") === "dark"){
     document.body.classList.add("dark");
 }
+
+updateThemeButton();
 
 function shareSite(){
     if(navigator.share){
